@@ -25,8 +25,11 @@ public class UserController {
             @NotNull @Length(min = 2) @RequestParam String username,
             @NotNull @Length(min = 2) @RequestParam String password
     ) {
-        if (service.register(username, password)) {
-            System.out.println("user registered: " + username);
+
+        // TODO: на фронте форма имеет значение login для регистрации
+
+        if (service.register(login, password)) {
+            System.out.println("user registered: " + login);
             return new ResponseEntity<>("User registered.", HttpStatus.CREATED);
         } else {
             System.out.println("user exists: " + username);
