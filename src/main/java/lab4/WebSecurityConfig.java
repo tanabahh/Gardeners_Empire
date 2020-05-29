@@ -13,9 +13,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-// конфигурация WebSecurity
+
 @Configuration
-@EnableWebSecurity // включить поддержку веб-безопасности SS и обеспечить интеграцию Spring MVC.
+@EnableWebSecurity
 public class  WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
@@ -43,8 +43,6 @@ public class  WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .csrf().disable(); //отключение защиты CSRF
     }
 
-
-    //кодирование пароля
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
