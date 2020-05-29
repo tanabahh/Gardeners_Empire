@@ -28,8 +28,8 @@ public class UserController {
 
         // TODO: на фронте форма имеет значение login для регистрации
 
-        if (service.register(login, password)) {
-            System.out.println("user registered: " + login);
+        if (service.register(username, password)) {
+            System.out.println("user registered: " + username);
             return new ResponseEntity<>("User registered.", HttpStatus.CREATED);
         } else {
             System.out.println("user exists: " + username);
