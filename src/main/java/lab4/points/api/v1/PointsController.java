@@ -3,13 +3,11 @@ package lab4.points.api.v1;
 import lab4.area.AreaService;
 import lab4.points.PointEntity;
 import lab4.points.PointsService;
-import lab4.users.UserEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 

@@ -14,7 +14,8 @@ public class UserEntity {
     @Column(nullable = false)
     private String password;
 
-    public UserEntity() { }
+    public UserEntity() {
+    }
 
     public UserEntity(String username, String password) {
         this.username = username;
