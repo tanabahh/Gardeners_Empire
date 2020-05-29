@@ -10,8 +10,6 @@ import javax.validation.constraints.NotNull;
 import java.security.Principal;
 
 @RestController
-// @CrossOrigin("localhost:4200")
-// @CrossOrigin
 @RequestMapping("/api/v1/user")
 public class UserController {
 
