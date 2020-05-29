@@ -11,7 +11,8 @@ import java.util.Objects;
 
 public class PointEntity implements Serializable {
 
-    @Id @SequenceGenerator(name = "point_id_seq")
+    @Id
+    @SequenceGenerator(name = "point_id_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "point_id_seq")
     private final Integer id;
 
@@ -81,12 +82,12 @@ public class PointEntity implements Serializable {
 
         final PointEntity that = (PointEntity) o;
         return Double.compare(that.x, x) == 0 &&
-                Double.compare(that.y, y) == 0 &&
-                Double.compare(that.r, r) == 0 &&
-                hit == that.hit &&
-                Objects.equals(id, that.id) &&
-                Objects.equals(user, that.user) &&
-                Objects.equals(created, that.created);
+               Double.compare(that.y, y) == 0 &&
+               Double.compare(that.r, r) == 0 &&
+               hit == that.hit &&
+               Objects.equals(id, that.id) &&
+               Objects.equals(user, that.user) &&
+               Objects.equals(created, that.created);
     }
 
     @Override

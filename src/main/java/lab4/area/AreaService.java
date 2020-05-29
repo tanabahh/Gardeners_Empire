@@ -1,6 +1,5 @@
 package lab4.area;
 
-import lab4.validation.OneOf;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -13,7 +12,7 @@ public class AreaService {
 
     public boolean contains(
             @DecimalMin(value = "-5") @DecimalMax(value = "5")
-            double x,
+                    double x,
             @DecimalMin(value = "-3") @DecimalMax(value = "3")
                     double y,
             @DecimalMin(value = "0") @DecimalMax(value = "5")
@@ -29,9 +28,9 @@ public class AreaService {
     private boolean doContains(double x, double y, double r) {
 
         return (
-                (x >= 0 && y >= 0 && x <= r && y <= r/2 ) || // rect
-                (x <= 0 && y >= 0 && y <= 0.5*( x + r)) || // triangle
-                (x <= 0 && y <= 0 && Math.sqrt(x * x + y * y) <= r/2) //arc
+                (x >= 0 && y >= 0 && x <= r && y <= r / 2) || // rect
+                (x <= 0 && y >= 0 && y <= 0.5 * (x + r)) || // triangle
+                (x <= 0 && y <= 0 && Math.sqrt(x * x + y * y) <= r / 2) //arc
         );
 
     }

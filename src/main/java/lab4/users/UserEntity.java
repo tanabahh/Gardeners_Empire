@@ -1,9 +1,11 @@
 package lab4.users;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Objects;
 
-@Entity(name="users")
+@Entity(name = "users")
 public class UserEntity {
 
     @Id
@@ -42,7 +44,7 @@ public class UserEntity {
 
         final UserEntity userEntity = (UserEntity) o;
         return Objects.equals(username, userEntity.username) &&
-                Objects.equals(password, userEntity.password);
+               Objects.equals(password, userEntity.password);
     }
 
     @Override

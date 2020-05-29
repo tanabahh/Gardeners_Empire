@@ -1,11 +1,9 @@
 package lab4.users.api.v1;
 
-import lab4.users.UserEntity;
 import lab4.users.UsersService;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
