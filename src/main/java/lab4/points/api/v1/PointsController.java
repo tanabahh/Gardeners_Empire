@@ -33,13 +33,7 @@ public class PointsController {
     public List<PointDto> getPoints(Principal principal) {
         List<PointEntity> points = service.getPoints(principal.getName());
 
-        return points.parallelStream().map(entity -> new PointDto(
-                entity.getX(),
-                entity.getY(),
-                entity.getR(),
-                entity.isHit(),
-                entity.getCreated())
-        ).collect(Collectors.toList());
+        return points.parallelStream().map(PointDto::new).collect(Collectors.toList());
     }
 
     @CrossOrigin
@@ -47,13 +41,10 @@ public class PointsController {
     public List<PointDto> allPointsRecalculation(@PathVariable Double r, Principal principal) {
         List<PointEntity> points = service.getPoints(principal.getName());
 
-        return points.parallelStream().filter(pointEntity -> pointEntity.getR().equals(r)).map(entity -> new PointDto(
-                entity.getX(),
-                entity.getY(),
-                entity.getR(),
-                entity.isHit(),
-                entity.getCreated())
-        ).collect(Collectors.toList());
+        return points.parallelStream()
+                .filter(pointEntity -> pointEntity.getR().equals(r))
+                .map(PointDto::new)
+                .collect(Collectors.toList());
     }
 
     @CrossOrigin
