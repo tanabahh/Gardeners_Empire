@@ -22,11 +22,6 @@ public class UserEntity {
         this.password = password;
     }
 
-    public UserEntity(String username) {
-        this.username = username;
-        password = null;
-    }
-
     public String getUsername() {
         return username;
     }
