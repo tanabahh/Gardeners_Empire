@@ -74,12 +74,4 @@ public class PointsController {
 
         return new ResponseEntity<>(hit, HttpStatus.CREATED);
     }
-
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(HttpMessageNotReadableException.class)
-    public String handleParsingException(Exception e) {
-        System.err.println("Exception occurred:");
-        e.printStackTrace(System.err);
-        return "Wrong syntax.";
-    }
 }

@@ -47,12 +47,4 @@ public class UserController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(HttpMessageNotReadableException.class)
-    public String handleParsingException(Exception e) {
-        System.err.println("Exception occurred:");
-        e.printStackTrace(System.err);
-        return "Wrong syntax.";
-    }
 }
