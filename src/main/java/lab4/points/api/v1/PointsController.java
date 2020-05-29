@@ -53,12 +53,8 @@ public class PointsController {
             Principal principal
     ) {
         final boolean hit = areaService.contains(x, y, r);
-        System.out.println(x);
-        System.out.println(y);
-        System.out.println(r);
-        System.out.println(hit);
-        service.addPoint(new PointEntity(null, new UserEntity(principal.getName()),
-                x, y, r, hit, LocalDateTime.now()));
+
+        service.addPoint(x, y, r, hit, principal.getName());
 
         return new ResponseEntity<>(hit, HttpStatus.CREATED);
     }
