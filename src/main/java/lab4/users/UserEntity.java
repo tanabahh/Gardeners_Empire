@@ -1,30 +1,25 @@
 package lab4.users;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Objects;
 
-@Entity(name="users")
+@Entity(name = "users")
 public class UserEntity {
 
     @Id
-    private final String username;
+    private String username;
 
     @Column(nullable = false)
-    private final String password;
+    private String password;
 
     public UserEntity() {
-        username = null;
-        password = null;
     }
 
     public UserEntity(String username, String password) {
         this.username = username;
         this.password = password;
-    }
-
-    public UserEntity(String username) {
-        this.username = username;
-        password = null;
     }
 
     public String getUsername() {
@@ -42,7 +37,7 @@ public class UserEntity {
 
         final UserEntity userEntity = (UserEntity) o;
         return Objects.equals(username, userEntity.username) &&
-                Objects.equals(password, userEntity.password);
+               Objects.equals(password, userEntity.password);
     }
 
     @Override

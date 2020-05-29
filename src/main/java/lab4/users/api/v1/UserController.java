@@ -1,19 +1,15 @@
 package lab4.users.api.v1;
 
-import lab4.users.UserEntity;
 import lab4.users.UsersService;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
 import java.security.Principal;
 
 @RestController
-// @CrossOrigin("localhost:4200")
-// @CrossOrigin
 @RequestMapping("/api/v1/user")
 public class UserController {
 
@@ -29,6 +25,9 @@ public class UserController {
             @NotNull @Length(min = 2) @RequestParam String username,
             @NotNull @Length(min = 2) @RequestParam String password
     ) {
+
+        // TODO: на фронте форма имеет значение login для регистрации
+
         if (service.register(username, password)) {
             System.out.println("user registered: " + username);
             return new ResponseEntity<>("User registered.", HttpStatus.CREATED);
@@ -46,13 +45,5 @@ public class UserController {
         }
 
         return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(HttpMessageNotReadableException.class)
-    public String handleParsingException(Exception e) {
-        System.err.println("Exception occurred:");
-        e.printStackTrace(System.err);
-        return "Wrong syntax.";
     }
 }

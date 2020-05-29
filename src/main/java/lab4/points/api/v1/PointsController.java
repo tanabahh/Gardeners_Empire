@@ -3,16 +3,11 @@ package lab4.points.api.v1;
 import lab4.area.AreaService;
 import lab4.points.PointEntity;
 import lab4.points.PointsService;
-import lab4.users.UserEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,13 +28,7 @@ public class PointsController {
     public List<PointDto> getPoints(Principal principal) {
         List<PointEntity> points = service.getPoints(principal.getName());
 
-        return points.parallelStream().map(entity -> new PointDto(
-                entity.getX(),
-                entity.getY(),
-                entity.getR(),
-                entity.isHit(),
-                entity.getCreated())
-        ).collect(Collectors.toList());
+        return points.parallelStream().map(PointDto::new).collect(Collectors.toList());
     }
 
     @CrossOrigin
@@ -47,13 +36,10 @@ public class PointsController {
     public List<PointDto> allPointsRecalculation(@PathVariable Double r, Principal principal) {
         List<PointEntity> points = service.getPoints(principal.getName());
 
-        return points.parallelStream().filter(pointEntity -> pointEntity.getR().equals(r)).map(entity -> new PointDto(
-                entity.getX(),
-                entity.getY(),
-                entity.getR(),
-                entity.isHit(),
-                entity.getCreated())
-        ).collect(Collectors.toList());
+        return points.parallelStream()
+                .filter(pointEntity -> pointEntity.getR().equals(r))
+                .map(PointDto::new)
+                .collect(Collectors.toList());
     }
 
     @CrossOrigin
@@ -65,21 +51,9 @@ public class PointsController {
             Principal principal
     ) {
         final boolean hit = areaService.contains(x, y, r);
-        System.out.println(x);
-        System.out.println(y);
-        System.out.println(r);
-        System.out.println(hit);
-        service.addPoint(new PointEntity(null, new UserEntity(principal.getName()),
-                x, y, r, hit, LocalDateTime.now()));
+
+        service.addPoint(x, y, r, hit, principal.getName());
 
         return new ResponseEntity<>(hit, HttpStatus.CREATED);
-    }
-
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(HttpMessageNotReadableException.class)
-    public String handleParsingException(Exception e) {
-        System.err.println("Exception occurred:");
-        e.printStackTrace(System.err);
-        return "Wrong syntax.";
     }
 }

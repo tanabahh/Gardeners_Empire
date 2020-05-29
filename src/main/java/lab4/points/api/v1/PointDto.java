@@ -1,5 +1,7 @@
 package lab4.points.api.v1;
 
+import lab4.points.PointEntity;
+
 import java.time.LocalDateTime;
 
 public class PointDto {
@@ -18,5 +20,9 @@ public class PointDto {
         this.r = r;
         this.hit = hit;
         this.created = created;
+    }
+
+    public PointDto(PointEntity pointEntity) {
+        this(pointEntity.getX(), pointEntity.getY(), pointEntity.getR(), pointEntity.isHit(), pointEntity.getCreated());
     }
 }

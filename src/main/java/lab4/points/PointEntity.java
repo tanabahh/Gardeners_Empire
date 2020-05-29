@@ -11,9 +11,10 @@ import java.util.Objects;
 
 public class PointEntity implements Serializable {
 
-    @Id @SequenceGenerator(name = "point_id_seq")
+    @Id
+    @SequenceGenerator(name = "point_id_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "point_id_seq")
-    private final Integer id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(nullable = false)
@@ -28,16 +29,7 @@ public class PointEntity implements Serializable {
     @Column(nullable = false)
     private final LocalDateTime created;
 
-    public PointEntity() {
-        id = null;
-        user = null;
-        x = y = r = 0;
-        hit = false;
-        created = null;
-    }
-
-    public PointEntity(Integer id, UserEntity user, double x, double y, double r, boolean hit, LocalDateTime created) {
-        this.id = id;
+    public PointEntity(UserEntity user, double x, double y, double r, boolean hit, LocalDateTime created) {
         this.user = user;
         this.x = x;
         this.y = y;
@@ -81,12 +73,12 @@ public class PointEntity implements Serializable {
 
         final PointEntity that = (PointEntity) o;
         return Double.compare(that.x, x) == 0 &&
-                Double.compare(that.y, y) == 0 &&
-                Double.compare(that.r, r) == 0 &&
-                hit == that.hit &&
-                Objects.equals(id, that.id) &&
-                Objects.equals(user, that.user) &&
-                Objects.equals(created, that.created);
+               Double.compare(that.y, y) == 0 &&
+               Double.compare(that.r, r) == 0 &&
+               hit == that.hit &&
+               Objects.equals(id, that.id) &&
+               Objects.equals(user, that.user) &&
+               Objects.equals(created, that.created);
     }
 
     @Override

@@ -13,7 +13,7 @@ import java.util.Collections;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private UsersService usersService;
+    private final UsersService usersService;
 
     public UserDetailsServiceImpl(UsersService usersService) {
         this.usersService = usersService;

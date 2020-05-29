@@ -5,6 +5,7 @@ import lab4.users.UsersRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -24,7 +25,7 @@ public class PointsService {
         System.out.println(point.getY());
         System.out.println(point.getR());
         System.out.println(point.isHit());
-        return repository.save(new PointEntity(null, usersRepository.getOne(point.getUser().getUsername()),
+        return repository.save(new PointEntity(usersRepository.getOne(point.getUser().getUsername()),
                 point.getX(), point.getY(), point.getR(), point.isHit(), point.getCreated()));
     }
 
@@ -32,5 +33,11 @@ public class PointsService {
         final UserEntity userEntity = usersRepository.getOne(username);
 
         return repository.findByUserOrderByCreatedDesc(userEntity);
+    }
+
+    public void addPoint(double x, double y, double r, boolean hit, String name) {
+        UserEntity user = usersRepository.getOne(name);
+        PointEntity point = new PointEntity(user, x, y, r, hit, LocalDateTime.now());
+        repository.save(point);
     }
 }
