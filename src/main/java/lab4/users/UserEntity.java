@@ -9,15 +9,12 @@ import java.util.Objects;
 public class UserEntity {
 
     @Id
-    private final String username;
+    private String username;
 
     @Column(nullable = false)
-    private final String password;
+    private String password;
 
-    public UserEntity() {
-        username = null;
-        password = null;
-    }
+    public UserEntity() { }
 
     public UserEntity(String username, String password) {
         this.username = username;
