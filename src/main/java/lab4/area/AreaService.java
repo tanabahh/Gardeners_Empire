@@ -13,7 +13,7 @@ public class AreaService {
 
     public boolean contains(
             @DecimalMin(value = "-5") @DecimalMax(value = "5")
-            double x,
+                    double x,
             @DecimalMin(value = "-3") @DecimalMax(value = "3")
                     double y,
             @DecimalMin(value = "0") @DecimalMax(value = "5")

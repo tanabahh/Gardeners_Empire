@@ -64,10 +64,10 @@ public class PointsController {
             @RequestParam double r,
             Principal principal
     ) {
-        final boolean hit = areaService.contains(x, y, r);
         System.out.println(x);
         System.out.println(y);
         System.out.println(r);
+        final boolean hit = areaService.contains(x, y, r);
         System.out.println(hit);
         service.addPoint(new PointEntity(null, new UserEntity(principal.getName()),
                 x, y, r, hit, LocalDateTime.now()));

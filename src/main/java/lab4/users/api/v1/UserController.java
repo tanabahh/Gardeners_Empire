@@ -23,11 +23,12 @@ public class UserController {
         this.service = service;
     }
 
+
     @CrossOrigin
     @PostMapping("/register")
     public ResponseEntity<?> register(
-            @NotNull @Length(min = 2) @RequestParam String username,
-            @NotNull @Length(min = 2) @RequestParam String password
+            @NotNull @Length(min = 2) @RequestParam(required=false, name="username") String username,
+            @NotNull @Length(min = 2) @RequestParam(required=false, name="password") String password
     ) {
         if (service.register(username, password)) {
             System.out.println("user registered: " + username);
