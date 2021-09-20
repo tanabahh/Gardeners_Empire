@@ -33,13 +33,7 @@ public class PointsController {
     public List<PointDto> getPoints(Principal principal) {
         List<PointEntity> points = service.getPoints(principal.getName());
 
-        return points.parallelStream().map(entity -> new PointDto(
-                entity.getX(),
-                entity.getY(),
-                entity.getR(),
-                entity.isHit(),
-                entity.getCreated())
-        ).collect(Collectors.toList());
+        return points.parallelStream().map(PointEntity::toDto).collect(Collectors.toList());
     }
 
     @CrossOrigin
@@ -47,13 +41,8 @@ public class PointsController {
     public List<PointDto> allPointsRecalculation(@PathVariable Double r, Principal principal) {
         List<PointEntity> points = service.getPoints(principal.getName());
 
-        return points.parallelStream().filter(pointEntity -> pointEntity.getR().equals(r)).map(entity -> new PointDto(
-                entity.getX(),
-                entity.getY(),
-                entity.getR(),
-                entity.isHit(),
-                entity.getCreated())
-        ).collect(Collectors.toList());
+        return points.parallelStream().filter(pointEntity -> pointEntity.getR().equals(r))
+            .map(PointEntity::toDto).collect(Collectors.toList());
     }
 
     @CrossOrigin
@@ -64,11 +53,7 @@ public class PointsController {
             @RequestParam double r,
             Principal principal
     ) {
-        System.out.println(x);
-        System.out.println(y);
-        System.out.println(r);
         final boolean hit = areaService.contains(x, y, r);
-        System.out.println(hit);
         service.addPoint(new PointEntity(null, new UserEntity(principal.getName()),
                 x, y, r, hit, LocalDateTime.now()));
 

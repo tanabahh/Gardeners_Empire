@@ -20,17 +20,11 @@ public class PointsService {
     }
 
     public PointEntity addPoint(PointEntity point) {
-        System.out.println(point.getX());
-        System.out.println(point.getY());
-        System.out.println(point.getR());
-        System.out.println(point.isHit());
-        return repository.save(new PointEntity(null, usersRepository.getOne(point.getUser().getUsername()),
-                point.getX(), point.getY(), point.getR(), point.isHit(), point.getCreated()));
+        return repository.save(point);
     }
 
     public List<PointEntity> getPoints(String username) {
         final UserEntity userEntity = usersRepository.getOne(username);
-
         return repository.findByUserOrderByCreatedDesc(userEntity);
     }
 }

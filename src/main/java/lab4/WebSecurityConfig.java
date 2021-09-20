@@ -13,9 +13,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-// конфигурация WebSecurity
 @Configuration
-@EnableWebSecurity // включить поддержку веб-безопасности SS и обеспечить интеграцию Spring MVC.
+@EnableWebSecurity
 public class  WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
@@ -28,8 +27,6 @@ public class  WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/v1/points/**").authenticated()
                 .antMatchers(HttpMethod.POST, "/api/users/logout").authenticated()
                 .anyRequest().permitAll()
-//                    .authorizeRequests() // авторизация
-//                    .anyRequest().authenticated() //для всех остальных - авторизация
                 .and()
                 .logout()
                     .permitAll()
@@ -38,13 +35,10 @@ public class  WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic().authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
                 .and()
                     .sessionManagement()
-                    .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED) // управляет только тем, что делает SS, а не всем приложением. SS не может создать сеанс, если мы не даем ему указанияПо умолчанию SS создаст сеанс, когда ему нужно("ifRequired").
+                    .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 .and()
                     .csrf().disable(); //отключение защиты CSRF
     }
-
-
-    //кодирование пароля
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

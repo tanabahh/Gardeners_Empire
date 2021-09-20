@@ -1,5 +1,6 @@
 package lab4.points;
 
+import lab4.points.api.v1.PointDto;
 import lab4.users.UserEntity;
 
 import javax.persistence.*;
@@ -92,5 +93,9 @@ public class PointEntity implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id, user, x, y, r, hit, created);
+    }
+
+    public PointDto toDto() {
+        return new PointDto(this.x, this.y, this.r, this.hit, this.created);
     }
 }

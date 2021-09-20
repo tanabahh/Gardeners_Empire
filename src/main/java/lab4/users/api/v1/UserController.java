@@ -1,6 +1,5 @@
 package lab4.users.api.v1;
 
-import lab4.users.UserEntity;
 import lab4.users.UsersService;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.http.HttpStatus;
@@ -12,8 +11,6 @@ import javax.validation.constraints.NotNull;
 import java.security.Principal;
 
 @RestController
-// @CrossOrigin("localhost:4200")
-// @CrossOrigin
 @RequestMapping("/api/v1/user")
 public class UserController {
 
@@ -42,11 +39,7 @@ public class UserController {
     @CrossOrigin
     @GetMapping("/login")
     public ResponseEntity<?> login(Principal principal) {
-        if (principal == null) {
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }
-
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(principal != null ? HttpStatus.OK : HttpStatus.FORBIDDEN);
     }
 
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
